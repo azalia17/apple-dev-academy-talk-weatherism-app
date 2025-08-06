@@ -48,41 +48,87 @@ recommendedItems(for:temperature:) → [RecommendationItem]
        ↓
 WeatherView renders items in grid section
 ```
-Low-Level Diagram
-- <Flow chart containing the service name etc, or swimlane stuffs>
+# Low-Level Diagram
 
-Code Structure & Implementation Details
-========================================
-<Some pseudo-code on code-change plan and the logic>
+```
+View: WeatherView.swift
+ ├── WeatherViewModel
+ │     └── recommendedItems(for:temperature:)
+ │             └── returns [RecommendationItem]
+ └── UI renders LazyVGrid for What to Bring section
 
-Operational Excellence
-=======================
-<alert and monitoring link, like datadog dashboard for example>
+Data: WeatherResponse
+ └── current.weatherCode
+ └── current.temperature2m
 
-Backward Compatibility / Rollback Plan
-======================================
-<outline plan for backward compatibility / rollback plan if needed>
+```
 
-Rollout Plan
-============
-<how we will roll out, ex: phased rollout according to app version? Or feature control / feature flag change?>
+# Code Structure & Implementation Details
 
-Out of scope
-============
-<list down things that is out of scope>
+- Add `RecommendationItem` struct with `name` and `icon` (UUID, SF Symbol).
+- Implement `recommendedItems(for:temperature:)` in `WeatherViewModel`.
+- Use `LazyVGrid` in `WeatherView` to render items with `Image(systemName:)` and `Text`.
 
-Demo
-====
-<screenshot, screen record>
- 
+```swift
+struct RecommendationItem: Identifiable {
+    let id = UUID()
+    let name: String
+    let icon: String
+}
 
-Steps to use this feature
-==========================
-<list down way to use this feature, ex: from which entry point, what to click, where to click, etc> 
+```
 
-Discussions and Alignments
-==========================
-Q: 
-A: 
+```swift
+func recommendedItems(for weatherCode: Int, temperature: Double?) -> [RecommendationItem] {
+    // Logic using weatherCode and temperature to return relevant items with icons
+}
 
+```
 
+# Operational Excellence
+
+- No backend or service dependencies
+- Visual verification in UI
+- Datadog custom event logging for weather item usage to be considered in v2
+
+# Backward Compatibility / Rollback Plan
+
+- Feature is self-contained in FE; rollback involves removing the LazyVGrid block
+- Wrapped behind UI conditional (`if let weather = ...`)
+- Can be disabled via feature flag in future if needed
+
+# Rollout Plan
+
+- Full rollout to all users in next app release
+- Can be toggled via feature flag if implemented later
+
+# Out of scope
+
+- Localization of recommended item text
+- Dynamic recommendation updates (e.g., UV Index, pollen)
+- Backend-driven item lists
+
+# Demo
+
+![Screenshot of “What to Bring” section with icons for umbrella, sunglasses, etc.]
+
+(Or attach screen recording of interaction)
+
+![simulator_screenshot_5731E97A-FB58-4CA7-B5C6-E6FDE5FED647.png](attachment:005cfe2c-b92c-48c9-b473-4059bba77cf9:simulator_screenshot_5731E97A-FB58-4CA7-B5C6-E6FDE5FED647.png)
+
+# Steps to use this feature
+
+1. Launch the Weatherism app.
+2. Enter or allow location to fetch weather data.
+3. Scroll down to the “What to Bring” section.
+4. View recommended items based on current weather and temperature.
+
+# Discussions and Alignments
+
+Q: Should we support additional weather parameters like UV Index or Air Quality?
+
+A: Not for now. Keep v1 lightweight and based on existing data.
+
+Q: Will we support localization in future?
+
+A: It’s in roadmap after multi-region support is rolled out.
