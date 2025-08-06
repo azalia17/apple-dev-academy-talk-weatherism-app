@@ -109,15 +109,8 @@ func recommendedItems(for weatherCode: Int, temperature: Double?) -> [Recommenda
 - Backend-driven item lists
 
 # Demo
-
-![Screenshot of “What to Bring![Uploading Simulator Screenshot - Clone 1 of iPhone 15 - 2025-08-06 at 11.09.59.png…]()
-” section with icons for umbrella, sunglasses, etc.]
 <img width="1179" height="2556" alt="Simulator Screenshot - Clone 1 of iPhone 15 - 2025-08-06 at 11 10 09" src="https://github.com/user-attachments/assets/048da412-7453-4011-a716-e4b556e8f260" />
 
-
-(Or attach screen recording of interaction)
-
-![simulator_screenshot_5731E97A-FB58-4CA7-B5C6-E6FDE5FED647.png](attachment:005cfe2c-b92c-48c9-b473-4059bba77cf9:simulator_screenshot_5731E97A-FB58-4CA7-B5C6-E6FDE5FED647.png)
 
 # Steps to use this feature
 
