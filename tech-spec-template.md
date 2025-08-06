@@ -1,33 +1,53 @@
-- Tech Spec : <Feature Name>
-- Author : <Author Name>
+- Tech Spec : Weather-Based Clothing & Item Recommendation
+- Author : Agustinus Pongoh
 - Engineering Lead : <Eng Lead name>
-- Product Specs : <Link to product specs, if any>
-- Important Documents : <Link to other important documents>
-- JIRA Epic : <Link to jira epic ticket>
-- Figma : <Link to figma / design file> 
-- Figma Prototype : <Or protopie link...>
-- BE Tech Specs : <if BE have tech specs...>
-- Content Specs : <if need localization...>
-- Instrumentation Specs : <if need to track user action / data...>
-- QA Test Suite : <link to QA test suite>
-- PICs : <name of the PICs of function, ex: PIC BE, PIC PM, PIC Designer, PIC FE, QA, PA, TPM etc>
+- Product Specs : -
+- Important Documents : -
+- JIRA Epic : -
+- Figma : -
+- Figma Prototype : -
+- BE Tech Specs : N/A (No BE changes required)
+- Content Specs : N/A (No localization currently planned)
+- Instrumentation Specs : -
+- QA Test Suite : -
+- PICs :
+    - PIC BE: N/A
+    - PIC PM: <Product Manager Name>
+    - PIC Designer: <Designer Name>
+    - PIC FE: Agustinus Pongoh
+    - QA: <QA Name>
+    - TPM: <TPM Name>
 
 Project Overview
 =================
-<Why project created, some short summary is okay...>
-
+This feature provides users with clothing and item recommendations based on the current weather condition and temperature. It enhances user value by offering personalized and practical advice for everyday weather scenarios, improving usability and engagement.
 
 Requirements
 =================
-Functional Requirements
-- <list down requirement that needs to be there to create the feature. Ex: feature need to show certain component under certain condition>
+**Functional Requirements**
+- Should return a list of items to wear or bring, based on `weatherCode` and `temperature2m`.
+- Items must include SF Symbols icons.
+- Items should appear in a grid-style section called “What to Bring”.
+- Section should be visible only when valid weather data is available.
 
-Non Functional Requirements
-- <some system requirements, ex: expected max CPU increase, FPS, etc>
+**Non-Functional Requirements**
+- Should not noticeably impact initial app load time.
+- Maintain 60 FPS on latest iPhone devices.
+- No additional API calls or backend dependencies.
 
-High-Level Diagram 
-- <High level Flow chart>
+High-Level Diagram
+==================
+[Flowchart]
 
+```text
+Weather API Response
+       ↓
+WeatherViewModel processes weatherCode & temperature
+       ↓
+recommendedItems(for:temperature:) → [RecommendationItem]
+       ↓
+WeatherView renders items in grid section
+```
 Low-Level Diagram
 - <Flow chart containing the service name etc, or swimlane stuffs>
 
